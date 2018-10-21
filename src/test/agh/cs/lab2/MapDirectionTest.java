@@ -11,11 +11,31 @@ public class MapDirectionTest {
 
         MapDirection mapDirection = MapDirection.WEST;
         assertTrue(mapDirection.next() == MapDirection.NORTH);
-        assertFalse(mapDirection.next() == MapDirection.SOUTH);
 
+        mapDirection = MapDirection.NORTH;
+        assertTrue(mapDirection.next() == MapDirection.EAST);
+
+        mapDirection = MapDirection.EAST;
+        assertTrue(mapDirection.next() == MapDirection.SOUTH);
+
+        mapDirection = MapDirection.SOUTH;
+        assertTrue(mapDirection.next() == MapDirection.WEST);
     }
 
     @Test
     public void prev() {
+
+        MapDirection mapDirection = MapDirection.WEST;
+        assertTrue(mapDirection.prev() == MapDirection.SOUTH);
+
+        mapDirection = MapDirection.SOUTH;
+        assertTrue(mapDirection.prev() == MapDirection.EAST);
+
+        mapDirection = MapDirection.EAST;
+        assertTrue(mapDirection.prev() == MapDirection.NORTH);
+
+        mapDirection = MapDirection.NORTH;
+        assertTrue(mapDirection.prev() == MapDirection.WEST);
+
     }
 }
