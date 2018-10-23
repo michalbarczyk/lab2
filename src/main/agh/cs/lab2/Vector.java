@@ -12,9 +12,7 @@ public class Vector {
     @Override
     public String toString() {
 
-        String string = new String();
-        string = "(" + x + ", " + y + ")";
-        return string;
+        return "(" + x + ", " + y + ")";
     }
 
     public boolean smaller(Vector vector) {
@@ -44,17 +42,23 @@ public class Vector {
         return new Vector(oldVector.x + this.x, oldVector.y + this.y);
     }
 
-    public boolean equals(Vector other) {
+    @Override
+    public boolean equals(Object other) {
 
         if (this == other)
             return true;
         if (!(other instanceof Vector))
             return false;
 
-        if (this.x == other.x && this.y == other.y)
+        Vector that = (Vector) other;
+
+        /*if (this.x == other.x && this.y == other.y)
             return true;
         else
             return false;
+        */
+
+        return (this.x == that.x && this.y == that.y);
     }
 
 
