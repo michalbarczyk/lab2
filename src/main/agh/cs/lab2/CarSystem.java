@@ -4,7 +4,7 @@ public class CarSystem {
 
     public static void main(String[] args) {
 
-        Vector vector1 = new Vector(1,2);
+        /*Vector vector1 = new Vector(1,2);
         System.out.println(vector1);
 
         Vector vector2 = new Vector(-2,5);
@@ -17,6 +17,16 @@ public class CarSystem {
         System.out.println(vector3.equals(vector1));
         System.out.println(vector3.equals(vector2));
 
-        System.out.println(vector1.upperRight(vector2));
+        System.out.println(vector1.upperRight(vector2));*/
+
+        Car car = new Car();
+        System.out.println(car.toString());
+        car.move(MoveDirection.RIGHT);
+        car.move(MoveDirection.FORWARD);
+        car.move(MoveDirection.FORWARD);
+        car.move(MoveDirection.FORWARD);
+        System.out.println(car.toString());
+
+
     }
 }

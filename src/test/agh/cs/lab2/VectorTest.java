@@ -10,11 +10,11 @@ public class VectorTest {
     public void toStringTest() {
 
         Vector vector = new Vector(4,6);
-        assertEquals("(" + vector.x + ", " + vector.y + ")", vector.toString());
+        assertEquals("(4, 6)", vector.toString());
     }
 
     @Test
-    public void smaller() {
+    public void testSmaller() {
 
         Vector vect1 = new Vector(4,4);
         Vector vect2 = new Vector(6,9);
