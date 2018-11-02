@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class VectorTest {
 
     @Test
-    public void toStringTest() {
+    public void testToString() {
 
         Vector vector = new Vector(4,6);
         assertEquals("(4, 6)", vector.toString());
@@ -24,7 +24,7 @@ public class VectorTest {
     }
 
     @Test
-    public void larger() {
+    public void testLarger() {
 
         Vector vect1 = new Vector(4,4);
         Vector vect2 = new Vector(6,9);
@@ -34,7 +34,7 @@ public class VectorTest {
     }
 
     @Test
-    public void upperRight() {
+    public void testUpperRight() {
 
         Vector vect1 = new Vector(4,4);
         Vector vect2 = new Vector(6,9);
@@ -47,7 +47,7 @@ public class VectorTest {
     }
 
     @Test
-    public void lowerLeft() {
+    public void testLowerLeft() {
 
         Vector vect1 = new Vector(4,4);
         Vector vect2 = new Vector(6,9);
@@ -60,7 +60,7 @@ public class VectorTest {
     }
 
     @Test
-    public void add() {
+    public void testAdd() {
 
         Vector vect1 = new Vector(4,4);
         Vector vect2 = new Vector(6,9);
@@ -68,7 +68,7 @@ public class VectorTest {
     }
 
     @Test
-    public void equals() {
+    public void testEquals() {
 
         Vector vect1 = new Vector(17,-4);
         Vector vect2 = new Vector(17,-4);

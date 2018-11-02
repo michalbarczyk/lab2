@@ -2,12 +2,32 @@ package agh.cs.lab2;
 
 public class  Car {
 
-    private MapDirection carDirection = MapDirection.NORTH;
-    private Vector carVector = new Vector(2, 2);
+    private MapDirection carDirection;
+    private Vector carVector;
+
+    public Car() {
+
+        this.carVector = new Vector(2, 2);
+        this.carDirection = MapDirection.NORTH;
+    }
+
+    public Car(int initX, int initY, MapDirection initDirection) {
+
+        this.carVector = new Vector(initX, initY);
+        this.carDirection = initDirection;
+    }
 
     public String toString() {
 
         return ("Position: " + carVector.toString() + " Direction: " + carDirection.toString());
+    }
+
+    public Vector getCarVector() {
+        return this.carVector;
+    }
+
+    public MapDirection getCarDirection() {
+        return this.carDirection;
     }
 
     public void move(MoveDirection direction) {
