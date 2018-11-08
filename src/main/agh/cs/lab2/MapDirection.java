@@ -8,16 +8,16 @@ enum MapDirection {
         switch (this) {
 
             case NORTH:
-                return "Polnoc";
+                return "N";
 
             case SOUTH:
-                return "Poludnie";
+                return "S";
 
             case WEST:
-                return "Zachod";
+                return "W";
 
             case EAST:
-                return "Wschod";
+                return "E";
         }
 
         return "";

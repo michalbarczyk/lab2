@@ -1,6 +1,6 @@
 package agh.cs.lab2;
 
-public class  Car {
+public class Car {
 
     private MapDirection carDirection;
     private Vector carVector;
@@ -17,9 +17,14 @@ public class  Car {
         this.carDirection = initDirection;
     }
 
+    public Car(IWorldMap map) {
+
+        map.
+    }
+
     public String toString() {
 
-        return ("Position: " + carVector.toString() + " Direction: " + carDirection.toString());
+        return carDirection.toString();
     }
 
     public Vector getCarVector() {
@@ -47,26 +52,28 @@ public class  Car {
 
                     case NORTH:
                         candidateVector = this.carVector.add(new Vector(0, 1));
-                        if (candidateVector.ifOnMap())
+                        //if (candidateVector.ifOnMap())
                             this.carVector = candidateVector;
                         break;
                     case SOUTH:
                         candidateVector = this.carVector.add(new Vector(0, -1));
-                        if (candidateVector.ifOnMap())
+                        //if (candidateVector.ifOnMap())
                             this.carVector = candidateVector;
                         break;
                     case WEST:
                         candidateVector = this.carVector.add(new Vector(-1, 0));
-                        if (candidateVector.ifOnMap())
+                        //if (candidateVector.ifOnMap())
                             this.carVector = candidateVector;
                         break;
                     case EAST:
                         candidateVector = this.carVector.add(new Vector(1, 0));
-                        if (candidateVector.ifOnMap())
+                        //if (candidateVector.ifOnMap())
                             this.carVector = candidateVector;
                         break;
                 }
                 break;
+
+
             case BACKWARD:
                 switch(carDirection) {
 
