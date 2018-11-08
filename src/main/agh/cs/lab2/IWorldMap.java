@@ -11,11 +11,11 @@ public interface IWorldMap {
     /**
      * Indicate if any object can move to the given position.
      *
-     * @param position
+     * @param vector
      *            The position checked for the movement possibility.
      * @return True if the object can move to that position.
      */
-    boolean canMoveTo(Vector position);
+    boolean canMoveTo(Vector vector);
 
     /**
      * Place a car on the map.

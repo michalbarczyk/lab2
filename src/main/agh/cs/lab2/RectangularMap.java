@@ -5,8 +5,7 @@ import java.util.List;
 
 public class RectangularMap implements IWorldMap {
 
-    List<Car> cars = new ArrayList<>();
-
+    private List<Car> carsOnMap;
     private int height;
     private int width;
 
@@ -14,26 +13,29 @@ public class RectangularMap implements IWorldMap {
 
         this.height = height;
         this.width = width;
+        carsOnMap = new ArrayList<>();
     }
 
-    boolean canMoveTo(Vector position) {
+    public boolean canMoveTo(Vector vector) {
 
-        for (Car car : cars) {
+        if (!(vector.x > -1 && vector.x < this.width && vector.y > -1 && vector.y < this.height))
+            return false;
 
-            if (car.getCarVector().equals(position))
+        for (Car car : carsOnMap) {
+
+            if (car.getCarVector().equals(vector))
                 return false;
         }
+
         return true;
     }
 
-    /**
-     * Place a car on the map.
-     *
-     * @param car
-     *            The car to place on the map.
-     * @return True if the car was placed. The car cannot be placed if the map is already occupied.
-     */
-    boolean place(Car car) {
+    public boolean place(Car car) {
+        if (this.canMoveTo(car.getCarVector())) {
+            this.carsOnMap.add(car);
+            return true;
+        }
+        else return false;
 
     }
 
@@ -44,32 +46,27 @@ public class RectangularMap implements IWorldMap {
      * @param directions
      *            Array of move directions.
      */
-    void run(MoveDirection[] directions) {
+    public void run(MoveDirection[] directions) {
 
     }
 
-    /**
-     * Return true if given position on the map is occupied. Should not be
-     * confused with canMove since there might be empty positions where the car
-     * cannot move.
-     *
-     * @param position
-     *            Position to check.
-     * @return True if the position is occupied.
-     */
-    boolean isOccupied(Vector position) {
+   public boolean isOccupied(Vector vector) {
 
+       for (Car car : carsOnMap) {
+           if (car.getCarVector().equals(vector))
+               return true;
+       }
+       return false;
     }
 
-    /**
-     * Return an object at a given position.
-     *
-     * @param position
-     *            The position of the object.
-     * @return Object or null if the position is not occupied.
-     */
-    Object objectAt(Vector position) {
+    public Object objectAt(Vector vector) {
 
+        for (Car car : carsOnMap) {
+            if (car.getCarVector().equals(vector))
+                return car;
+        }
+
+        return null;
     }
 
 }
