@@ -5,21 +5,25 @@ public class Car {
     private MapDirection carDirection;
     private Vector carVector;
 
-    public Car() {
-
-        this.carVector = new Vector(2, 2);
+    /*private Car(Vector initVector) {
+        this.carVector = initVector;
         this.carDirection = MapDirection.NORTH;
-    }
+    }*/
 
-    public Car(int initX, int initY, MapDirection initDirection) {
 
-        this.carVector = new Vector(initX, initY);
-        this.carDirection = initDirection;
-    }
+    /*public Car(IWorldMap map) {
 
-    public Car(IWorldMap map) {
+        Car newCar = new Car(new Vector(2, 2));
 
-        map.
+        map.place(newCar);
+
+    }*/
+
+    public Car(IWorldMap map, Vector initVector) {
+
+        this.carVector = initVector;
+        this.carDirection = MapDirection.NORTH;
+
     }
 
     public String toString() {

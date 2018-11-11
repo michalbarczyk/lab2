@@ -9,7 +9,7 @@ public class RectangularMap implements IWorldMap {
     private int height;
     private int width;
 
-    public RectangularMap (int width, int height) {
+    public RectangularMap(int width, int height) {
 
         this.height = height;
         this.width = width;
@@ -31,7 +31,7 @@ public class RectangularMap implements IWorldMap {
     }
 
     public boolean place(Car car) {
-        if (this.canMoveTo(car.getCarVector())) {
+        if (!this.isOccupied(car.getCarVector())) {
             this.carsOnMap.add(car);
             return true;
         }
@@ -47,7 +47,9 @@ public class RectangularMap implements IWorldMap {
      *            Array of move directions.
      */
     public void run(MoveDirection[] directions) {
-
+        for (int i = 0; i < directions.length; i++) {
+            carsOnMap.get(i%carsOnMap.size()).move(directions[i]);
+        }
     }
 
    public boolean isOccupied(Vector vector) {
