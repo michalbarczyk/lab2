@@ -4,21 +4,11 @@ public class CarSystem {
 
     public static void main(String[] args) {
 
-        IWorldMap carMap = new RectangularMap(5,5);
-
-
-        Car myCar = new Car();
-
-        carMap.place()
-
-        MoveDirection[] moveTable = OptionsParser.parse(new String[] {"f", "f","l","f","r"});
-        for (MoveDirection moveDirection : moveTable) {
-
-            myCar.move(moveDirection);
-            System.out.println(myCar.toString());
-        }
-
-
-
+        MoveDirection[] directions = OptionsParser.parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        map.place(new Car(map));
+        map.place(new Car(map, new Vector(3,4)));
+        //map.run(directions);
+        map.toString();
     }
 }

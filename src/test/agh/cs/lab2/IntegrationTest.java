@@ -9,12 +9,14 @@ public class IntegrationTest {
     @Test
     public void testMapBorder() {
 
-        Car testCar = new Car();
+        IWorldMap map = new RectangularMap(5,5);
+
+        Car testCar = new Car(map);
         testCar.move(MoveDirection.BACKWARD);
         testCar.move(MoveDirection.BACKWARD);
         testCar.move(MoveDirection.BACKWARD);
-        assertEquals(new Vector(2, 0), testCar.getCarVector());
-        assertEquals(MapDirection.NORTH, testCar.getCarDirection());
+        assertEquals(new Vector(2, 0), testCar.getVector());
+        assertEquals(MapDirection.NORTH, testCar.getDirection());
 
         testCar.move(MoveDirection.RIGHT);
         testCar.move(MoveDirection.FORWARD);
@@ -23,35 +25,24 @@ public class IntegrationTest {
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
-        assertEquals(new Vector(4, 0), testCar.getCarVector());
-        assertEquals(MapDirection.EAST, testCar.getCarDirection());
+        assertEquals(new Vector(4, 0), testCar.getVector());
+        assertEquals(MapDirection.EAST, testCar.getDirection());
 
         testCar.move(MoveDirection.LEFT);
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
-        assertEquals(new Vector(4, 3), testCar.getCarVector());
-        assertEquals(MapDirection.NORTH, testCar.getCarDirection());
+        assertEquals(new Vector(4, 3), testCar.getVector());
+        assertEquals(MapDirection.NORTH, testCar.getDirection());
     }
 
-    @Test
-    public void testDirection() {
-
-        Car testCar = new Car(0, 0, MapDirection.WEST);
-        testCar.move(MoveDirection.LEFT);
-        testCar.move(MoveDirection.LEFT);
-        assertEquals(MapDirection.EAST, testCar.getCarDirection());
-
-        testCar.move(MoveDirection.RIGHT);
-        testCar.move(MoveDirection.RIGHT);
-        testCar.move(MoveDirection.RIGHT);
-        assertEquals(MapDirection.NORTH, testCar.getCarDirection());
-    }
 
     @Test
     public void testWithOptionsParser() {
 
-        Car testCar = new Car(2, 2, MapDirection.NORTH);
+        IWorldMap map = new RectangularMap(5,5);
+
+        Car testCar = new Car(map);
         MoveDirection[] moveTable = OptionsParser.parse(new String[]
                 {"t","f","r","f","r","f","f","r","f","f","l","b","v","b","b","301","l","f","f","f","l","k","r"});
 
@@ -59,7 +50,7 @@ public class IntegrationTest {
 
             testCar.move(moveDirection);
         }
-        assertEquals(MapDirection.EAST, testCar.getCarDirection());
-        assertEquals(new Vector(4, 4), testCar.getCarVector());
+        assertEquals(MapDirection.EAST, testCar.getDirection());
+        assertEquals(new Vector(4, 4), testCar.getVector());
     }
 }

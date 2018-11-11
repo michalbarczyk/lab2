@@ -61,9 +61,9 @@ public class Vector {
         return (this.x == that.x && this.y == that.y);
     }
 
-    protected boolean ifOnMap() {
+    public Vector getOppositeVector() {
 
-        return (this.x > -1 && this.x < 5 && this.y > -1 && this.y < 5);
+        return new Vector(this.x * (-1), this.y * (-1));
     }
 
 

@@ -23,7 +23,7 @@ public class RectangularMap implements IWorldMap {
 
         for (Car car : carsOnMap) {
 
-            if (car.getCarVector().equals(vector))
+            if (car.getVector().equals(vector))
                 return false;
         }
 
@@ -31,7 +31,7 @@ public class RectangularMap implements IWorldMap {
     }
 
     public boolean place(Car car) {
-        if (!this.isOccupied(car.getCarVector())) {
+        if (this.canMoveTo(car.getVector())) {
             this.carsOnMap.add(car);
             return true;
         }
@@ -55,7 +55,7 @@ public class RectangularMap implements IWorldMap {
    public boolean isOccupied(Vector vector) {
 
        for (Car car : carsOnMap) {
-           if (car.getCarVector().equals(vector))
+           if (car.getVector().equals(vector))
                return true;
        }
        return false;
@@ -64,11 +64,18 @@ public class RectangularMap implements IWorldMap {
     public Object objectAt(Vector vector) {
 
         for (Car car : carsOnMap) {
-            if (car.getCarVector().equals(vector))
+            if (car.getVector().equals(vector))
                 return car;
         }
 
         return null;
+    }
+
+    @Override
+    public String toString() {
+
+        MapVisualizer mapVisualizer = new MapVisualizer(this);
+        return mapVisualizer.draw(new Vector(0, 0),new Vector(this.width, this.height));
     }
 
 }
