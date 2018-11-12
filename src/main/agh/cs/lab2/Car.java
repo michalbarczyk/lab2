@@ -6,26 +6,18 @@ public class Car {
     private Vector carVector;
     private IWorldMap carMap;
 
-    /*private Car(Vector initVector) {
-        this.carVector = initVector;
-        this.carDirection = MapDirection.NORTH;
-    }*/
-
-
     public Car(IWorldMap map) {
 
         this.carVector = new Vector(2,2);
         this.carDirection = MapDirection.NORTH;
         this.carMap = map;
-
         this.carMap.place(this);
     }
 
     public Car(IWorldMap map, Vector initVector) {
 
+        this(map);
         this.carVector = initVector;
-        this.carDirection = MapDirection.NORTH;
-        map.place(this);
     }
 
     public Vector getVector() {
@@ -94,7 +86,5 @@ public class Car {
                     this.carVector = candidateVector;
                 break;
         }
-
-
     }
 }

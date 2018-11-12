@@ -36,7 +36,6 @@ public class IntegrationTest {
         assertEquals(MapDirection.NORTH, testCar.getDirection());
     }
 
-
     @Test
     public void testWithOptionsParser() {
 
@@ -52,5 +51,19 @@ public class IntegrationTest {
         }
         assertEquals(MapDirection.EAST, testCar.getDirection());
         assertEquals(new Vector(4, 4), testCar.getVector());
+    }
+
+    @Test
+    public void testCarCollsion() {
+
+        IWorldMap map = new RectangularMap(10, 5);
+
+        map.place(new Car(map, new Vector(6, 1)));
+        map.place(new Car(map, new Vector(6,2)));
+
+        map.run(OptionsParser.parse(new String[]{"f"}));
+
+        assertEquals(((RectangularMap) map).getCarByIndex(0).getVector(),new Vector(6,1));
+
     }
 }

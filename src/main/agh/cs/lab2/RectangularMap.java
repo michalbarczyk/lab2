@@ -78,4 +78,9 @@ public class RectangularMap implements IWorldMap {
         return mapVisualizer.draw(new Vector(0, 0),new Vector(this.width, this.height));
     }
 
+    public Car getCarByIndex(int index) {
+
+        return carsOnMap.get(index);
+    }
+
 }
