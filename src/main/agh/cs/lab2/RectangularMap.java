@@ -18,7 +18,7 @@ public class RectangularMap extends AbstractWorldMap {
     @Override
     public boolean canMoveTo(Vector vector) {
 
-        if (!(vector.x > -1 && vector.x < this.width && vector.y > -1 && vector.y < this.height))
+        if (!(vector.x > -1 && vector.x <= this.width && vector.y > -1 && vector.y <= this.height))
             return false;
 
         return super.canMoveTo(vector);

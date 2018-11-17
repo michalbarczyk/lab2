@@ -51,5 +51,13 @@ public class RectangularMapTest extends AbstractWorldMap {
 
     @Test
     public void testObjectAt() {
+
+        IWorldMap map = new RectangularMap(16,23);
+        MoveDirection[] directions = OptionsParser.parse(new String[]{"f","f","f","b","f"});
+        map.place(new Car(map));
+        map.place(new Car(map, new Vector(4,4)));
+        map.run(directions);
+
+        assertTrue(map.objectAt(new Vector(2,5)) instanceof Car);
     }
 }

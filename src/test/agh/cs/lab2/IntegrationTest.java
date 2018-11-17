@@ -25,14 +25,14 @@ public class IntegrationTest {
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
-        assertEquals(new Vector(4, 0), testCar.getVector());
+        assertEquals(new Vector(5, 0), testCar.getVector());
         assertEquals(MapDirection.EAST, testCar.getDirection());
 
         testCar.move(MoveDirection.LEFT);
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
         testCar.move(MoveDirection.FORWARD);
-        assertEquals(new Vector(4, 3), testCar.getVector());
+        assertEquals(new Vector(5, 3), testCar.getVector());
         assertEquals(MapDirection.NORTH, testCar.getDirection());
     }
 
