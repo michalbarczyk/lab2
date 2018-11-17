@@ -1,6 +1,6 @@
 package agh.cs.lab2;
 
-public class Car {
+public class Car implements IMapElement {
 
     private MapDirection carDirection;
     private Vector carVector;

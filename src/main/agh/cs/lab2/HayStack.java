@@ -1,6 +1,6 @@
 package agh.cs.lab2;
 
-public class HayStack {
+public class HayStack implements IMapElement {
 
     private Vector hayStackVector;
 
@@ -9,7 +9,7 @@ public class HayStack {
         this.hayStackVector = hayStackVector;
     }
 
-    Vector getVector() {
+    public Vector getVector() {
 
         return this.hayStackVector;
     }

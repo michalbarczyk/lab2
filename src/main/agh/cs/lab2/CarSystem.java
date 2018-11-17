@@ -14,9 +14,6 @@ public class CarSystem {
         hayStacks.add(new HayStack(new Vector(3, 6)));
         hayStacks.add(new HayStack(new Vector(2, 0)));
 
-        hayStacks.add(new HayStack(new Vector(-15, -9)));
-        hayStacks.add(new HayStack(new Vector(20, 23)));
-
 
         IWorldMap map = new UnboundedMap(hayStacks);
         map.place(new Car(map));
