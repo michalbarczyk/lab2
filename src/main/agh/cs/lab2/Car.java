@@ -8,8 +8,8 @@ public class Car {
 
     public Car(IWorldMap map) {
 
-        this.carVector = new Vector(2,2);
-        this.carDirection = MapDirection.NORTH;
+        this.carVector = Consts.DEFAULTCARVECTOR;
+        this.carDirection = Consts.DEFAULTCARDIRECTION;
         this.carMap = map;
         this.carMap.place(this);
     }
@@ -34,57 +34,50 @@ public class Car {
         return this.carDirection;
     }
 
-    public void move(MoveDirection direction) {
+    private Vector getCandidateVector(MoveDirection direction) {
+
+        Vector versor = null;
+
+        switch (this.carDirection) {
+            case NORTH:
+                versor = new Vector(0,1);
+                break;
+            case SOUTH:
+                versor = new Vector(0,-1);
+                break;
+            case EAST:
+                versor = new Vector(1,0);
+                break;
+            case WEST:
+                versor = new Vector(-1,0);
+                break;
+        }
 
         Vector candidateVector = null;
 
-        switch(direction) {
+        switch (direction) {
 
-            case LEFT:
-                this.carDirection = carDirection.prev();
-                break;
-            case RIGHT:
-                this.carDirection = carDirection.next();
-                break;
             case FORWARD:
-                switch(carDirection) {
-
-                    case NORTH:
-                        candidateVector = this.carVector.add(new Vector(0, 1));
-                        break;
-                    case SOUTH:
-                        candidateVector = this.carVector.add(new Vector(0, -1));
-                        break;
-                    case WEST:
-                        candidateVector = this.carVector.add(new Vector(-1, 0));
-                        break;
-                    case EAST:
-                        candidateVector = this.carVector.add(new Vector(1, 0));
-                        break;
-                }
-                if (this.carMap.canMoveTo(candidateVector))
-                    this.carVector = candidateVector;
+                candidateVector = this.carVector.add(versor);
                 break;
-
             case BACKWARD:
-                switch(carDirection) {
-
-                    case NORTH:
-                        candidateVector = this.carVector.add(new Vector(0, -1));
-                        break;
-                    case SOUTH:
-                        candidateVector = this.carVector.add(new Vector(0, 1));
-                        break;
-                    case WEST:
-                        candidateVector = this.carVector.add(new Vector(1, 0));
-                        break;
-                    case EAST:
-                        candidateVector = this.carVector.add(new Vector(-1, 0));
-                        break;
-                }
-                if (this.carMap.canMoveTo(candidateVector))
-                    this.carVector = candidateVector;
+                candidateVector = this.carVector.add(versor.getOpposite());
                 break;
+        }
+
+        return candidateVector;
+    }
+
+    public void move(MoveDirection direction) {
+
+        if (direction == MoveDirection.LEFT)
+            this.carDirection = carDirection.prev();
+        else if (direction == MoveDirection.RIGHT)
+            this.carDirection = carDirection.next();
+        else {
+            Vector candidateVector = getCandidateVector(direction);
+            if (this.carMap.canMoveTo(candidateVector))
+                this.carVector = candidateVector;
         }
     }
 }

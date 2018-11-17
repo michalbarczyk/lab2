@@ -1,22 +1,23 @@
 package agh.cs.lab2;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UnboundedMap implements IWorldMap {
+public class UnboundedMap extends AbstractWorldMap {
 
     private List<HayStack> hayStacksOnMap;
-    private List<Car> carsOnMap;
 
     UnboundedMap(List<HayStack> hayStacks) {
 
+        super();
         this.hayStacksOnMap = hayStacks;
     }
 
     private Vector getUpRightCorner() {
 
-        Vector upRightVector = carsOnMap.get(0).getVector();
+        Vector upRightVector = super.getCarsOnMap().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : carsOnMap) {
+        for (Car car : super.getCarsOnMap()) {
 
             upRightVector = upRightVector.upperRight(car.getVector());
         }
@@ -31,9 +32,9 @@ public class UnboundedMap implements IWorldMap {
 
     private Vector getDownLeftCorner() {
 
-        Vector downLeftVector = carsOnMap.get(0).getVector();
+        Vector downLeftVector = super.getCarsOnMap().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : carsOnMap) {
+        for (Car car : super.getCarsOnMap()) {
 
             downLeftVector = downLeftVector.lowerLeft(car.getVector());
         }
@@ -46,65 +47,41 @@ public class UnboundedMap implements IWorldMap {
         return downLeftVector;
     }
 
+    @Override
     public String toString() {
 
         MapVisualizer mapVisualizer = new MapVisualizer(this);
         return mapVisualizer.draw(this.getDownLeftCorner(), this.getUpRightCorner());
     }
 
+    @Override
     public boolean canMoveTo(Vector vector) {
 
         return !isOccupied(vector);
     }
 
-    public boolean place(Car car) {
-        if (this.canMoveTo(car.getVector())) {
-            this.carsOnMap.add(car);
-            return true;
-        }
-        else return false;
-
-    }
-
-    public void run(MoveDirection[] directions) {
-        for (int i = 0; i < directions.length; i++) {
-            carsOnMap.get(i%carsOnMap.size()).move(directions[i]);
-        }
-    }
-
+    @Override
     public boolean isOccupied(Vector vector) {
-
-        for (Car car : carsOnMap) {
-            if (car.getVector().equals(vector))
-                return true;
-        }
 
         for (HayStack hayStack : hayStacksOnMap) {
             if (hayStack.getVector().equals(vector))
                 return true;
         }
-        return false;
+
+        return super.isOccupied(vector);
     }
 
+    @Override
     public Object objectAt(Vector vector) {
-
-        for (Car car : carsOnMap) {
-            if (car.getVector().equals(vector))
-                return car;
-        }
 
         for (HayStack hayStack : hayStacksOnMap) {
             if (hayStack.getVector().equals(vector))
                 return hayStack;
         }
 
-        return null;
+        return super.objectAt(vector);
     }
 
-    public Car getCarByIndex(int index) {
-
-        return carsOnMap.get(index);
-    }
 
 
 }

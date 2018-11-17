@@ -61,7 +61,7 @@ public class Vector {
         return (this.x == that.x && this.y == that.y);
     }
 
-    public Vector getOppositeVector() {
+    public Vector getOpposite() {
 
         return new Vector(this.x * (-1), this.y * (-1));
     }
