@@ -1,34 +1,27 @@
 package agh.cs.lab2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UnboundedMap extends AbstractWorldMap {
 
-    private List<HayStack> hayStacksOnMap;
-    private Map<Vector, HayStack> mapOfHayStacksOnMap;
+    private Map<Vector, HayStack> hayStacksOnMap;
 
 
     public UnboundedMap(List<HayStack> hayStacks) {
 
-        super();
-        this.hayStacksOnMap = hayStacks;
-
-        this.mapOfHayStacksOnMap = new HashMap<>.();
+        this.hayStacksOnMap = Util.listToLinkedHashMap(hayStacks);
     }
 
     private Vector getUpRightCorner() {
 
-        Vector upRightVector = super.getCarsOnMap().get(0).getVector(); // random existing car to compare below
+        Vector upRightVector = getCarsOnMap().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : getCarsOnMap()) {
+        for (Car car : getCarsOnMap(). values()) {
 
             upRightVector = upRightVector.upperRight(car.getVector());
         }
 
-        for (HayStack hayStack : hayStacksOnMap) {
+        for (HayStack hayStack : hayStacksOnMap.values()) {
 
             upRightVector = upRightVector.upperRight(hayStack.getVector());
         }
@@ -38,14 +31,14 @@ public class UnboundedMap extends AbstractWorldMap {
 
     private Vector getDownLeftCorner() {
 
-        Vector downLeftVector = super.getCarsOnMap().get(0).getVector(); // random existing car to compare below
+        Vector downLeftVector = getCarsOnMap().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : super.getCarsOnMap()) {
+        for (Car car : getCarsOnMap().values()) {
 
             downLeftVector = downLeftVector.lowerLeft(car.getVector());
         }
 
-        for (HayStack hayStack : hayStacksOnMap) {
+        for (HayStack hayStack : hayStacksOnMap.values()) {
 
             downLeftVector = downLeftVector.lowerLeft(hayStack.getVector());
         }
@@ -69,14 +62,14 @@ public class UnboundedMap extends AbstractWorldMap {
     @Override
     public boolean isOccupied(Vector vector) {
 
-        return mapOfHayStacksOnMap.get(vector) != null || super.isOccupied(vector);
+        return hayStacksOnMap.get(vector) != null || super.isOccupied(vector);
     }
 
     @Override
     public Object objectAt(Vector vector) {
 
-        if (mapOfHayStacksOnMap.get(vector) != null)
-            return mapOfHayStacksOnMap.get(vector);
+        if (hayStacksOnMap.get(vector) != null)
+            return hayStacksOnMap.get(vector);
 
         else return super.objectAt(vector);
     }
