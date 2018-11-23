@@ -2,9 +2,16 @@ package agh.cs.lab2;
 
 public class OptionsParser {
 
-    public static MoveDirection[] parse(String[] initials) {
+    public static MoveDirection[] parse(String[] initials) throws IllegalArgumentException {
 
         int directionTableSize = 0;
+
+        for (String initial : initials) {
+
+            if (initial != "f" && initial != "b" && initial != "r" && initial != "l")
+                throw new IllegalArgumentException(initial + " is not legal move specification");
+        }
+
         for (String initial : initials) {
 
             if (initial.equals("f") || initial.equals("b") || initial.equals("r") || initial.equals("l"))

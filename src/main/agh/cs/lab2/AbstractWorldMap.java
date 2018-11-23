@@ -7,7 +7,7 @@ public class AbstractWorldMap implements IWorldMap {
 
     private List<Car> carsOnMap;
 
-    AbstractWorldMap() {
+    protected AbstractWorldMap() {
 
         this.carsOnMap = new ArrayList<Car>();
     }
@@ -22,12 +22,12 @@ public class AbstractWorldMap implements IWorldMap {
         return !isOccupied(vector);
     }
 
-    public boolean place(Car car) {
+    public boolean place(Car car) throws IllegalArgumentException{
         if (this.canMoveTo(car.getVector())) {
             this.carsOnMap.add(car);
             return true;
         }
-        else return false;
+        else return false;//throw new IllegalArgumentException(car.getVector().toString() + " is already occupied");
 
     }
 

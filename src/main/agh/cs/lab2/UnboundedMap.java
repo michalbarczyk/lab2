@@ -17,7 +17,7 @@ public class UnboundedMap extends AbstractWorldMap {
 
         Vector upRightVector = super.getCarsOnMap().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : super.getCarsOnMap()) {
+        for (Car car : getCarsOnMap()) {
 
             upRightVector = upRightVector.upperRight(car.getVector());
         }
