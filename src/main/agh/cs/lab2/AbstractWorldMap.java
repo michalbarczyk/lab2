@@ -27,7 +27,7 @@ public class AbstractWorldMap implements IWorldMap {
             this.carsOnMap.add(car);
             return true;
         }
-        else return false;//throw new IllegalArgumentException(car.getVector().toString() + " is already occupied");
+        else throw new IllegalArgumentException(car.getVector().toString() + " is already occupied");
 
     }
 

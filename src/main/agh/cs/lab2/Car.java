@@ -11,13 +11,13 @@ public class Car implements IMapElement {
         this.carVector = Consts.DEFAULTCARVECTOR;
         this.carDirection = Consts.DEFAULTCARDIRECTION;
         this.carMap = map;
-        this.carMap.place(this);
     }
 
     public Car(IWorldMap map, Vector initVector) {
 
         this(map);
         this.carVector = initVector;
+
     }
 
     public Vector getVector() {
