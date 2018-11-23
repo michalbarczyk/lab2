@@ -1,15 +1,19 @@
 package agh.cs.lab2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AbstractWorldMap implements IWorldMap {
 
     private List<Car> carsOnMap;
+    private Map<Vector,Car> mapOfCarsOnMap;
 
     protected AbstractWorldMap() {
 
         this.carsOnMap = new ArrayList<Car>();
+        this.mapOfCarsOnMap = new HashMap<>();
     }
 
     protected List<Car> getCarsOnMap() {
@@ -25,6 +29,7 @@ public class AbstractWorldMap implements IWorldMap {
     public boolean place(Car car) throws IllegalArgumentException {
         if (this.canMoveTo(car.getVector())) {
             this.carsOnMap.add(car);
+            this.mapOfCarsOnMap.put(car.getVector(), car);
             return true;
         }
         else throw new IllegalArgumentException(car.getVector().toString() + " is already occupied");
@@ -39,21 +44,12 @@ public class AbstractWorldMap implements IWorldMap {
 
     public boolean isOccupied(Vector vector) {
 
-        for (Car car : carsOnMap) {
-            if (car.getVector().equals(vector))
-                return true;
-        }
-        return false;
+        return mapOfCarsOnMap.get(vector) != null;
     }
 
     public Object objectAt(Vector vector) {
 
-        for (Car car : carsOnMap) {
-            if (car.getVector().equals(vector))
-                return car;
-        }
-
-        return null;
+        return mapOfCarsOnMap.get(vector);
     }
 
     public Car getCarByIndex(int index) {

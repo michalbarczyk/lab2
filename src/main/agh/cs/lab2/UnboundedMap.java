@@ -1,16 +1,22 @@
 package agh.cs.lab2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UnboundedMap extends AbstractWorldMap {
 
     private List<HayStack> hayStacksOnMap;
+    private Map<Vector, HayStack> mapOfHayStacksOnMap;
 
-    UnboundedMap(List<HayStack> hayStacks) {
+
+    public UnboundedMap(List<HayStack> hayStacks) {
 
         super();
         this.hayStacksOnMap = hayStacks;
+
+        this.mapOfHayStacksOnMap = new HashMap<>.();
     }
 
     private Vector getUpRightCorner() {
@@ -63,23 +69,16 @@ public class UnboundedMap extends AbstractWorldMap {
     @Override
     public boolean isOccupied(Vector vector) {
 
-        for (HayStack hayStack : hayStacksOnMap) {
-            if (hayStack.getVector().equals(vector))
-                return true;
-        }
-
-        return super.isOccupied(vector);
+        return mapOfHayStacksOnMap.get(vector) != null || super.isOccupied(vector);
     }
 
     @Override
     public Object objectAt(Vector vector) {
 
-        for (HayStack hayStack : hayStacksOnMap) {
-            if (hayStack.getVector().equals(vector))
-                return hayStack;
-        }
+        if (mapOfHayStacksOnMap.get(vector) != null)
+            return mapOfHayStacksOnMap.get(vector);
 
-        return super.objectAt(vector);
+        else return super.objectAt(vector);
     }
 
 

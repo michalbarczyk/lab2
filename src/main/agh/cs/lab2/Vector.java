@@ -1,5 +1,7 @@
 package agh.cs.lab2;
 
+import java.util.Objects;
+
 public class Vector {
 
     public final int x;
@@ -52,12 +54,6 @@ public class Vector {
 
         Vector that = (Vector) other;
 
-        /*if (this.x == other.x && this.y == other.y)
-            return true;
-        else
-            return false;
-        */
-
         return (this.x == that.x && this.y == that.y);
     }
 
@@ -66,11 +62,8 @@ public class Vector {
         return new Vector(this.x * (-1), this.y * (-1));
     }
 
-
-
-
-
-
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
 }
