@@ -8,14 +8,9 @@ public class OptionsParser {
 
         for (String initial : initials) {
 
-            if (initial != "f" && initial != "b" && initial != "r" && initial != "l")
-                throw new IllegalArgumentException(initial + " is not legal move specification");
-        }
-
-        for (String initial : initials) {
-
             if (initial.equals("f") || initial.equals("b") || initial.equals("r") || initial.equals("l"))
                 directionTableSize++;
+            else throw new IllegalArgumentException(initial + " is not legal move specification");
         }
 
         MoveDirection[] directionTable = new MoveDirection[directionTableSize];

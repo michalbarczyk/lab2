@@ -22,7 +22,7 @@ public class AbstractWorldMap implements IWorldMap {
         return !isOccupied(vector);
     }
 
-    public boolean place(Car car) throws IllegalArgumentException{
+    public boolean place(Car car) throws IllegalArgumentException {
         if (this.canMoveTo(car.getVector())) {
             this.carsOnMap.add(car);
             return true;
