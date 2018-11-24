@@ -14,9 +14,9 @@ public class UnboundedMap extends AbstractWorldMap {
 
     private Vector getUpRightCorner() {
 
-        Vector upRightVector = getCarsOnMap().get(0).getVector(); // random existing car to compare below
+        Vector upRightVector = getCarsOnMapList().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : getCarsOnMap(). values()) {
+        for (Car car : getCarsOnMapList()) {
 
             upRightVector = upRightVector.upperRight(car.getVector());
         }
@@ -31,9 +31,9 @@ public class UnboundedMap extends AbstractWorldMap {
 
     private Vector getDownLeftCorner() {
 
-        Vector downLeftVector = getCarsOnMap().get(0).getVector(); // random existing car to compare below
+        Vector downLeftVector = getCarsOnMapList().get(0).getVector(); // random existing car to compare below
 
-        for (Car car : getCarsOnMap().values()) {
+        for (Car car : getCarsOnMapList()) {
 
             downLeftVector = downLeftVector.lowerLeft(car.getVector());
         }

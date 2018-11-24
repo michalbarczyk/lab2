@@ -4,17 +4,19 @@ import java.util.*;
 
 public class AbstractWorldMap implements IWorldMap {
 
-    private Map<Vector,Car> carsOnMap;
+    private Map<Vector,Car> carsOnMapMap;
+    private List<Car> carsOnMapList;
 
 
     protected AbstractWorldMap() {
 
-        this.carsOnMap = new LinkedHashMap<>();
+        this.carsOnMapMap = new HashMap<>();
+        this.carsOnMapList = new LinkedList<>();
     }
 
-    protected Map<Vector,Car> getCarsOnMap() {
+    protected List<Car> getCarsOnMapList() {
 
-        return carsOnMap;
+        return carsOnMapList;
     }
 
     public boolean canMoveTo(Vector vector) {
@@ -24,7 +26,8 @@ public class AbstractWorldMap implements IWorldMap {
 
     public boolean place(Car car) throws IllegalArgumentException {
         if (this.canMoveTo(car.getVector())) {
-            this.carsOnMap.put(car.getVector(), car);
+            this.carsOnMapMap.put(car.getVector(), car);
+            this.carsOnMapList.add(car);
             return true;
         }
         else throw new IllegalArgumentException(car.getVector().toString() + " is already occupied");
@@ -33,38 +36,33 @@ public class AbstractWorldMap implements IWorldMap {
 
     public void run(MoveDirection[] directions) {
 
-        Iterator<Map.Entry<Vector, Car>> it = carsOnMap.entrySet().iterator();
-
         for (int i = 0; i < directions.length; i++) {
 
-            Map.Entry<Vector, Car> entry =  it.next();
-            Car car = entry.getValue();
-            car.move(directions[i]);
+            Car carToBeMoved = carsOnMapList.get(i%carsOnMapList.size());
+            Vector prevVector = carToBeMoved.getVector();
+            carToBeMoved.move(directions[i]);
+            if (!prevVector.equals(carToBeMoved.getVector())) {
 
-            if (!car.getVector().equals(entry.getKey())) {
-
-                carsOnMap.remove(prevVector);
-                carsOnMap.put(car.getVector(), car);
+                this.carsOnMapMap.remove(prevVector);
+                this.carsOnMapMap.put(carToBeMoved.getVector(), carToBeMoved);
             }
 
-            if (!it.hasNext())
-                it = carsOnMap.keySet().iterator();
         }
 
     }
 
     public boolean isOccupied(Vector vector) {
 
-        return carsOnMap.get(vector) != null;
+        return carsOnMapMap.get(vector) != null;
     }
 
     public Object objectAt(Vector vector) {
 
-        return carsOnMap.get(vector);
+        return carsOnMapMap.get(vector);
     }
 
     public Car getCarByIndex(int index) {
 
-        return carsOnMap.get(index);
+        return carsOnMapMap.get(index);
     }
 }
