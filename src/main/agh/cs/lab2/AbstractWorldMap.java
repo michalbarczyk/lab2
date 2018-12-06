@@ -2,7 +2,7 @@ package agh.cs.lab2;
 
 import java.util.*;
 
-public class AbstractWorldMap implements IWorldMap {
+public class AbstractWorldMap implements IWorldMap, IPositionChangeObserver {
 
     private Map<Vector,Car> carsOnMapMap;
     private List<Car> carsOnMapList;
@@ -28,6 +28,7 @@ public class AbstractWorldMap implements IWorldMap {
         if (this.canMoveTo(car.getVector())) {
             this.carsOnMapMap.put(car.getVector(), car);
             this.carsOnMapList.add(car);
+            car.addObserver(this); // here or, for instance in Car constructor?
             return true;
         }
         else throw new IllegalArgumentException(car.getVector().toString() + " is already occupied");
@@ -39,16 +40,16 @@ public class AbstractWorldMap implements IWorldMap {
         for (int i = 0; i < directions.length; i++) {
 
             Car carToBeMoved = carsOnMapList.get(i%carsOnMapList.size());
-            Vector prevVector = carToBeMoved.getVector();
             carToBeMoved.move(directions[i]);
-            if (!prevVector.equals(carToBeMoved.getVector())) {
-
-                this.carsOnMapMap.remove(prevVector);
-                this.carsOnMapMap.put(carToBeMoved.getVector(), carToBeMoved);
-            }
-
         }
 
+    }
+
+    @Override
+    public void positionChanged(Vector oldVector, Vector newVector) {
+
+        Car car = carsOnMapMap.remove(oldVector);
+        this.carsOnMapMap.put(newVector, car);
     }
 
     public boolean isOccupied(Vector vector) {

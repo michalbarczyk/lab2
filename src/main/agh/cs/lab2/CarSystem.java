@@ -9,7 +9,7 @@ public class CarSystem {
 
         try {
 
-            MoveDirection[] directions = OptionsParser.parse(new String[]{"f","f","f","f","r","f"});
+            MoveDirection[] directions = OptionsParser.parse(new String[]{"f","f","f","f","r","f","l","f","f","f","f"});
             List<HayStack> hayStacks = new ArrayList<>();
             hayStacks.add(new HayStack(new Vector(0, 0)));
             hayStacks.add(new HayStack(new Vector(7, 7)));
@@ -20,8 +20,7 @@ public class CarSystem {
             IWorldMap map = new UnboundedMap(hayStacks);
             map.place(new Car(map));
             map.run(directions);
-
-            //map.place(new Car(map, new Vector(3,5))); //already occupied vector
+            //map.place(new Car(map, new Vector(3,9))); //already occupied vector
             System.out.println(map);
 
         } catch (IllegalArgumentException e) {
